@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Countdown to 25</title>
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+    color: white;
+    text-align: center;
+    padding: 15vh 20px;
+  }
+  h1 { font-size: 2.2em; }
+  #timer { font-size: 1.8em; margin-top: 20px; }
+  #quote {
+    margin-top: 40px;
+    font-size: 1.3em;
+    font-style: italic;
+    color: #ffd369;
+  }
+  #reminder {
+    margin-top: 30px;
+    font-size: 1.1em;
+    color: #7CFFB2;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Countdown till I turn 25 🎉</h1>
+<div id="timer">Loading...</div>
+<div id="quote"></div>
+<div id="reminder"></div>
+
+<script>
+const targetDate = new Date("January 11, 2030 00:00:00").getTime();
+
+const quotes = [
+  "Practice head voice today 🎶",
+  "Warm up before singing — always 🎤",
+  "10 minutes today > 0 minutes",
+  "Future me sings better because I practiced",
+  "Don’t force high notes — mix smart",
+  "Consistency builds range",
+  "Sing relaxed, not loud"
+];
+
+function updateTimer() {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    document.getElementById("timer").innerHTML = "🎂 YOU ARE 25 NOW 🎂";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("timer").innerHTML =
+    `${days} days<br>${hours} hours ${minutes} minutes ${seconds} seconds`;
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+
+function showQuote() {
+  const q = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById("quote").innerText = q;
+}
+
+showQuote();
+setInterval(showQuote, 10000);
+
+// Daily reminder (when opened)
+const today = new Date().toDateString();
+const lastVisit = localStorage.getItem("lastVisit");
+
+if (lastVisit !== today) {
+  document.getElementById("reminder").innerText =
+    "🔔 Reminder: Practice singing today (even 10 minutes!)";
+  localStorage.setItem("lastVisit", today);
+}
+</script>
+
+</body>
+</html>
+
+
+
