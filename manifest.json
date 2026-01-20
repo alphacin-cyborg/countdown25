@@ -1,7 +1,7 @@
 {
   "name": "Countdown to 25",
   "short_name": "25 Countdown",
-  "start_url": "countdown25.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0f2027",
   "theme_color": "#203a43",
